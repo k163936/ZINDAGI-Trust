@@ -1,1 +1,1 @@
-This is ZINDAGI
+This is Zindagi Trust

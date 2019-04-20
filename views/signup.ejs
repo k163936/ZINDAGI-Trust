@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <link href="css/login-style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="login-page">
+    <!-- <h1>Register</h1> -->
+    <div class="form">
+      <h1>Registeration</h1>
+      <% if(message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+      <% } %>
+      <form class="login-form" action="/signup" method="POST">
+        <input type="text" placeholder="name" />
+        <input type="password" placeholder="password" name="password" />
+        <input type="text" placeholder="username" name="username" />
+        <button>create</button>
+        <p class="message">Already registered? <a href="/login">Sign In</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="js/login-script.js"></script>
+
+</html>

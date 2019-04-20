@@ -1,0 +1,32 @@
+ html {
+    padding-top: 15%;
+    padding-left: 5%;
+    text-align: center;
+	margin:0;
+	background: rgba(0,0,51,1);
+	background: -moz-linear-gradient(45deg,
+	 rgba(0,0,51,1) 0%,
+	 rgba(0,3,64,1) 15%,
+	 rgba(6,1,28,1) 100%)
+}
+
+body {
+	margin:0;
+	padding:0;
+	width:100%;
+	color:#ffffff;
+	font:normal 12px/1.8em Arial, Helvetica, sans-serif;
+}
+
+.main {
+	padding:0;
+	margin:0;
+}
+
+h1 {
+	margin:0;
+	padding:20px 0 0 0;
+	color:#636363;
+	font:bold 38px/1.2em Arial, Helvetica, sans-serif;
+	letter-spacing:-2px;
+}
