@@ -1,0 +1,34 @@
+<% include partials/header.ejs %>
+
+<body>
+    <div class="main">
+        <div class="main_resize">
+            <div class="header">
+                <div class="logo">
+                    <h1><a href="#"><span>ZINDAGI</span>Trust<small>ao dede inhain <span>ZINDAGI</span></small></a></h1>
+                </div>
+
+                <div class="clr"></div>
+                <div class="hbg">
+
+                </div>
+                <div class="menu_nav">
+                    <span>
+                    </span>
+                    <br>
+                </div>
+                <!-- <br><br><br> -->
+                <div class="form">
+                    <form class="login-form" action="/profile/postDonation" method="POST">
+                        <input type="text" placeholder="AMOUNT" name="amount" />
+                        <textarea placeholder="DETAILS" name="details" cols="40" rows="5"></textarea>
+                        <!-- <input type="text" cols="40" rows="5" placeholder="details" name="details" /> -->
+                        <br><br>
+                        <button>POST</button>
+                        <p class="message">Do not want to post. <a href="/profile">Exit</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
