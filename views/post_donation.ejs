@@ -1,34 +1,32 @@
-<% include partials/header.ejs %>
+<html>
+  <head>
+    <link href="css/login-style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<body>
-    <div class="main">
-        <div class="main_resize">
-            <div class="header">
-                <div class="logo">
-                    <h1><a href="#"><span>ZINDAGI</span>Trust<small>ao dede inhain <span>ZINDAGI</span></small></a></h1>
-                </div>
-
-                <div class="clr"></div>
-                <div class="hbg">
-
-                </div>
-                <div class="menu_nav">
-                    <span>
-                    </span>
-                    <br>
-                </div>
-                <!-- <br><br><br> -->
-                <div class="form">
-                    <form class="login-form" action="/profile/postDonation" method="POST">
-                        <input type="text" placeholder="AMOUNT" name="amount" />
-                        <textarea placeholder="DETAILS" name="details" cols="40" rows="5"></textarea>
-                        <!-- <input type="text" cols="40" rows="5" placeholder="details" name="details" /> -->
-                        <br><br>
-                        <button>POST</button>
-                        <p class="message">Do not want to post. <a href="/profile">Exit</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
+  <body>
+    <div class="login-page">
+      <!-- <h1>Register</h1> -->
+      <div class="form">
+        <h1>Post Donation</h1>
+        <form class="login-form" action="/postDonation" method="POST">
+          <input type="text" placeholder="Amount in Rupees" name="amount" />
+          <textarea
+            rows="4"
+            cols="31"
+            placeholder="Details"
+            name="details"
+          ></textarea>
+          <br /><br />
+          <p>To confirm you donation post please confirm your password.</p>
+          <% if(message.length > 0) { %>
+          <div class="alert alert-danger"><%= message %></div>
+          <% } %>
+          <input type="password" placeholder="Password" name="password" />
+          <button>Post</button>
+          <p class="message">Want to exit <a href="/">Click here!</a></p>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
+  <script type="text/javascript" src="js/login-script.js"></script>
+</html>
