@@ -59,9 +59,7 @@ module.exports = (app, passport) => {
     });
   });
 
-  app.post("/postDonation", function(req, res) {
-    console.log("Hi");
-  });
+  app.post("/postDonation", function(req, res) {});
 };
 
 function isLoggedIn(req, res, next) {

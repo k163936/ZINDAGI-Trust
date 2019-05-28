@@ -1,12 +1,19 @@
-const LocalStrategy = require("passport-local").Strategy;
+var LocalStrategy = require("passport-local").Strategy;
+
+var mysql = require("mysql");
+var bcrypt = require("bcrypt-nodejs");
+var dbconfig = require("./database");
+var connection = mysql.createConnection(dbconfig.connection);
+
+connection.query("USE " + dbconfig.database);
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
     done(null, user.ID);
   });
 
-  passport.deserializeUser(function(ID, done) {
-    connection.query("SELECT * FROM users WHERE ID = ? ", [ID], (err, rows) => {
+  passport.deserializeUser(function(id, done) {
+    connection.query("SELECT * FROM users WHERE ID = ? ", [id], (err, rows) => {
       done(err, rows[0]);
     });
   });
@@ -36,27 +43,18 @@ module.exports = function(passport) {
             } else {
               var newUserMysql = {
                 username: username,
-                password: password,
-                name: req.body.name
+                password: password //bcrypt.hashSync(password, null, null)
+                // name: name
               };
 
               var insertQuery =
-                "INSERT INTO users (name, username, password) values (?, ?, ?)";
-              console.log(
-                insertQuery,
-                newUserMysql.name,
-                newUserMysql.username,
-                newUserMysql.password
-              );
+                "INSERT INTO users (username, password) values (?, ?)";
+              // console.log(insertQuery, newUserMysql.name, newUserMysql.username, newUserMysql.password)
               connection.query(
                 insertQuery,
-                [
-                  newUserMysql.name,
-                  newUserMysql.username,
-                  newUserMysql.password
-                ],
+                [newUserMysql.username, newUserMysql.password],
                 (err, rows) => {
-                  newUserMysql.ID = rows.insertId;
+                  newUserMysql.id = rows.insertId;
                   return done(null, newUserMysql);
                 }
               );
@@ -89,7 +87,8 @@ module.exports = function(passport) {
                 req.flash("loginMessage", "No User Found")
               );
 
-            if (password != rows[0].password)
+            if (password == rows.passpword)
+              // if (!bcrypt.compareSync(password, rows[0].password))
               return done(
                 null,
                 false,

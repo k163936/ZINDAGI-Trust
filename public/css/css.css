@@ -27,6 +27,10 @@ h1 {
 	margin:0;
 	padding:20px 0 0 0;
 	color:#636363;
-	font:bold 38px/1.2em Arial, Helvetica, sans-serif;
+	font:bold 100px/1.2em Arial, Helvetica, sans-serif;
 	letter-spacing:-2px;
+}
+
+h1 span {
+	color:#78bbe6;
 }

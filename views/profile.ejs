@@ -1,23 +1,33 @@
 <% include partials/header.ejs %>
-
 <body>
   <div class="main">
     <div class="main_resize">
       <div class="header">
         <div class="logo">
-          <h1><a href="#"><span>ZINDAGI</span>Trust<small>Ao dede inhain <span>ZINDAGI!</span></small></a></h1>
+          <h1>
+            <a href="#"
+              ><span>ZINDAGI</span>Trust<small
+                >Ao dede inhain ZINDAGI!</small
+              ></a
+            >
+          </h1>
         </div>
 
         <div class="clr"></div>
         <!-- Profile Picture -->
-        <div class="hbg"><a href="/upload"><img src="/uploads/<%= user.display_picture %>" width="180" height="180"
-              class="responsive-img"></a></div>
+        <div class="hbg">
+          <img
+            style="border:1px solid;"
+            src="images/header_images.jpg"
+            width="180"
+            height="180"
+            alt=""
+          />
+        </div>
         <!-- Menu bar starts -->
         <div class="menu_nav">
-          <span>
-            <h2><%= user.name %></h2>
-          </span>
-          <hr>
+          <span><h2><% user.name %></h2></span>
+          <hr />
           <ul>
             <!-- <li><span><h2><% %> IDs</h2></span></li> -->
             <li class="active"><a href="/">Home</a></li>
@@ -28,60 +38,63 @@
           </ul>
           <div class="clr"></div>
         </div>
-        <hr>
+        <hr />
       </div>
       <!-- Menu bar Ends -->
 
       <div class="content">
         <div class="content_bg">
           <div class="mainbar">
-              <h2><span>Top Stories</span></h2>
-            <% data.forEach((i, index) => { %>
             <!-- donation starts -->
             <div class="article">
-              <!-- <h2><span>Top Stories</span></h2> -->
-              <br>
+              <h2><span>Top Stories</span></h2>
+              <br />
               <div class="clr"></div>
-              <p class="post-data"><span class="date">March 16, 2018</span> &nbsp;|&nbsp; Posted by
-                <%= i.name %>
+              <p class="post-data">
+                <span class="date">March 16, 2018</span> &nbsp;|&nbsp; Posted by
+                <a href="#">Shahid Hussain</a>
               </p>
-              <p>A person in Liaqatabad had an accident yesterday and need 50,000 RS urgent.</p>
+              <p>
+                A person in Liaqatabad had an accident yesterday and need 50,000
+                RS urgent.
+              </p>
               <p class="spec"><a href="#" class="com fr">Donate</a></p>
               <div class="clr"></div>
-            <hr>
             </div>
             <!-- donation ends -->
-            <% }) %>
-            <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a
-                href="#">2</a><a href="#">&raquo;</a></div>
+
+            <div class="pagenavi">
+              <span class="pages">Page 1 of 2</span
+              ><span class="current">1</span><a href="#">2</a
+              ><a href="#">&raquo;</a>
+            </div>
           </div>
           <div class="sidebar">
             <div class="gadget">
               <h2 class="star"><span>Menu</span></h2>
-              <br>
+              <br />
               <div class="clr"></div>
               <ul class="sb_menu">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="/post-donation">Post Donation</a></li>
+                <li><a href="/postDonation">Post Donation</a></li>
                 <li><a href="#">Response</a></li>
                 <li><a href="#">My Donations</a></li>
               </ul>
             </div>
+            <hr />
           </div>
           <div class="clr"></div>
         </div>
       </div>
+      <!-- <hr> -->
     </div>
     <div class="fbg">
       <div class="fbg_resize">
-        <div class="col c1">
-
-        </div>
-        <div class="clr">
-          <hr>
-        </div>
-        <hr>
+        <div class="col c1"></div>
+        <div class="clr"><hr /></div>
+        <hr />
       </div>
     </div>
   </div>
   <% include partials/footer.ejs %>
+</body>
