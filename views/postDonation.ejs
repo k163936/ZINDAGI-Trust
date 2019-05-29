@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link href="css/login-style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/login-style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
@@ -8,7 +8,7 @@
       <!-- <h1>Register</h1> -->
       <div class="form">
         <h1>Post Donation</h1>
-        <form class="login-form" action="/postDonation" method="POST">
+        <form class="login-form" action="/profile/postDonation" method="POST">
           <input type="text" placeholder="Amount in Rupees" name="amount" />
           <textarea
             rows="4"
@@ -17,16 +17,56 @@
             name="details"
           ></textarea>
           <br /><br />
-          <p>To confirm you donation post please confirm your password.</p>
+          <div
+            style="float: left;
+          clear: none;"
+          >
+            <label
+              for="Doner"
+              style="float: left;
+          clear: none;
+          display: block;
+          padding: 2px 1em 0 0;"
+              >Doner</label
+            >
+            <input
+              type="radio"
+              name="type"
+              id="Doner"
+              value="doner"
+              style="float: left;
+          clear: none;
+          margin: 2px 0 0 2px;"
+            />
+            <label
+              for="Accepter"
+              style="float: left;
+          clear: none;
+          display: block;
+          padding: 2px 1em 0 0;"
+              >Accepter</label
+            >
+            <input
+              type="radio"
+              name="type"
+              id="Accepter"
+              value="accepter"
+              style="float: left;
+          clear: none;
+          /* margin: 2px 0 0 2px;"
+            />
+          </div>
           <% if(message.length > 0) { %>
-          <div class="alert alert-danger"><%= message %></div>
+          <p><%= message %></p>
+          <% } else { %>
+          <p>To confirm you donation post please confirm your password.</p>
           <% } %>
           <input type="password" placeholder="Password" name="password" />
           <button>Post</button>
-          <p class="message">Want to exit <a href="/">Click here!</a></p>
+          <p class="message">Want to exit <a href="/profile">Click here!</a></p>
         </form>
       </div>
     </div>
   </body>
-  <script type="text/javascript" src="js/login-script.js"></script>
+  <script type="text/javascript" src="/js/login-script.js"></script>
 </html>

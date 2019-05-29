@@ -1,3 +1,12 @@
+const express = require("express");
+
+var mysql = require("mysql");
+var bcrypt = require("bcrypt-nodejs");
+var dbconfig = require("./database");
+var connection = mysql.createConnection(dbconfig.connection);
+
+connection.query("USE " + dbconfig.database);
+
 module.exports = (app, passport) => {
   app.get("/", function(req, res) {
     res.render("index");
@@ -42,9 +51,15 @@ module.exports = (app, passport) => {
   );
 
   app.get("/profile", isLoggedIn, function(req, res) {
-    console.log(req.user.name);
-    res.render("profile", {
-      user: req.user
+    let query = "SELECT * FROM users WHERE ID  = " + req.user.ID;
+    connection.query(query, (err, rslt) => {
+      if (err) {
+        res.redirect("/login");
+      } else {
+        res.render("profile", {
+          user: rslt
+        });
+      }
     });
   });
 
@@ -52,17 +67,50 @@ module.exports = (app, passport) => {
     req.logout();
     res.redirect("/");
   });
-
-  app.get("/postDonation", function(req, res) {
+  /*******************************************************************/
+  const router = express.Router();
+  app.use("/profile", router);
+  /*******************************************************************/
+  router.get("/postDonation", isLoggedIn, function(req, res) {
     res.render("postDonation", {
       message: req.flash("loginMessage")
     });
   });
 
-  app.post("/postDonation", function(req, res) {});
+  router.post("/postDonation", isLoggedIn, function(req, res) {
+    req.flash("info", "Flash is back!");
+    if (req.body.password != req.user.password) {
+      console.log(req.flash("info"));
+      res.render("postDonation", {
+        message: "Incorrect password, try again!"
+      });
+    } else {
+      let query =
+        "INSERT INTO donations (UID, amount, details, type) VALUES ('" +
+        req.user.ID +
+        "','" +
+        req.body.amount +
+        "','" +
+        req.body.details +
+        "','" +
+        req.body.type +
+        "');";
+
+      console.log(query);
+      connection.query(query, (err, result) => {
+        if (err) {
+          console.log("Query failed");
+          res.redirect("/profile/postDonations");
+        } else {
+          console.log("Run sssss");
+          res.redirect("/profile");
+        }
+      });
+    }
+  });
 };
 
-function isLoggedIn(req, res, next) {
+function isLoggedIn(req, res, next, data) {
   if (req.isAuthenticated()) return next();
 
   res.redirect("/");

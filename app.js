@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const passport = require("passport");
 const flash = require("connect-flash");
 
-require("./config/passport")(passport);
+require("./routes/passport")(passport);
 
 // app.use(morgan('dev'));
 app.use(cookieParser());
@@ -18,7 +18,6 @@ app.use(
     extended: true
   })
 );
-
 app.use(express.static(__dirname + "/public"));
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
