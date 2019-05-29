@@ -1,4 +1,5 @@
 <% include partials/header.ejs %>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
 <body>
   <div class="main">
     <div class="main_resize">
@@ -18,7 +19,7 @@
         <div class="hbg">
           <img
             style="border:1px solid;"
-            src="images/header_images.jpg"
+            src="/images/header_images.jpg"
             width="180"
             height="180"
             alt=""
@@ -26,13 +27,13 @@
         </div>
         <!-- Menu bar starts -->
         <div class="menu_nav">
-          <span><h2><%= user[0].name %></h2></span>
+          <span><h2><%= user.name %></h2></span>
           <hr />
           <ul>
             <!-- <li><span><h2><% %> IDs</h2></span></li> -->
-            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/profile/doner">Doners</a></li>
-            <li><a href="/profile/accepter">Accepters</a></li>
+            <li class="active"><a href="/profile/accepter">Accepters</a></li>
             <li><a href="/logout">Log out</a></li>
             <!-- <li><a href="contact.html">Contact Us</a></li> -->
           </ul>
@@ -47,19 +48,20 @@
           <div class="mainbar">
             <!-- donation starts -->
             <div class="article">
-              <h2><span>Top Stories</span></h2>
+              <h2><span>Top Accepters</span></h2>
               <br />
+              <% result.forEach((i, index) => {%>
               <div class="clr"></div>
               <p class="post-data">
                 <span class="date">March 16, 2018</span> &nbsp;|&nbsp; Posted by
-                <a href="#">Shahid Hussain</a>
+                <a href="#"></a>
               </p>
               <p>
-                A person in Liaqatabad had an accident yesterday and need 50,000
-                RS urgent.
+                <%= i.details %>
               </p>
               <p class="spec"><a href="#" class="com fr">Donate</a></p>
               <div class="clr"></div>
+              <% }) %>
             </div>
             <!-- donation ends -->
 
@@ -75,7 +77,7 @@
               <br />
               <div class="clr"></div>
               <ul class="sb_menu">
-                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="/profile/postDonation">Post Donation</a></li>
                 <li><a href="/responeses">Response</a></li>
                 <li><a href="/myDonations">My Donations</a></li>

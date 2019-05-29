@@ -108,6 +108,37 @@ module.exports = (app, passport) => {
       });
     }
   });
+
+  router.get("/doner", function(req, res) {
+    let query = "SELECT * FROM donations WHERE type = 'doner';";
+
+    connection.query(query, function(err, result) {
+      if (err) {
+        console.log("Error in query");
+      } else {
+        res.render("doner", {
+          user: req.user,
+          result: result
+        });
+      }
+    });
+  });
+
+  router.get("/accepter", function(req, res) {
+    let query = "SELECT * FROM donations WHERE type = 'accepter';";
+    console.log(query);
+    connection.query(query, function(err, result) {
+      if (err) {
+        console.log("Error in query");
+      } else {
+        console.log(result);
+        res.render("accepter", {
+          user: req.user,
+          result: result
+        });
+      }
+    });
+  });
 };
 
 function isLoggedIn(req, res, next, data) {
