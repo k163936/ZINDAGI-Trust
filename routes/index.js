@@ -139,6 +139,21 @@ module.exports = (app, passport) => {
       }
     });
   });
+  router.get("/myDonations", function(req, res) {
+    let query = "SELECT * FROM donations WHERE users.ID = donations.UID;";
+    console.log(query);
+    connection.query(query, function(err, result) {
+      if (err) {
+        console.log("Error in query");
+      } else {
+        console.log(result);
+        res.render("accepter", {
+          user: req.user,
+          result: result
+        });
+      }
+    });
+  });
 };
 
 function isLoggedIn(req, res, next, data) {
