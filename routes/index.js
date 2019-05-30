@@ -48,7 +48,7 @@ module.exports = (app, passport) => {
   app.post(
     "/signup",
     passport.authenticate("local-signup", {
-      successRedirect: "/login",
+      successRedirect: "/profile/edit",
       failureRedirect: "/signup",
       failureFlash: true
     })
@@ -165,11 +165,11 @@ module.exports = (app, passport) => {
     sendMail(req, res, req.user);
   });
 
-  app.get("/hi", function(req, res) {
+  router.get("/edit", function(req, res) {
     res.render("edit-profile");
   });
 
-  app.post("/upload", (req, res) => {
+  router.post("/edit", (req, res) => {
     fun_upload(req, res, err => {
       if (err) {
         res.render("edit-profile", {
@@ -181,11 +181,21 @@ module.exports = (app, passport) => {
             msg: "Error: No File Selected!"
           });
         } else {
-          res.render("profile", {
-            msg: "File Uploaded!",
-            file: `uploads/${req.file.filename}`,
-            user: "rslt"
+          file = req.file.filename;
+          let query = "UPDATE `users` SET `profilePic` = '" + file + "';";
+          // console.log(query);
+          connection.query(query, function(err) {
+            if (err) {
+              console.log("Error in query");
+            } else {
+              res.redirect("/profile");
+            }
           });
+          // res.redirect("/profile") //, {
+          //   msg: "File Uploaded!",
+          //   file: `uploads/${req.file.filename}`,
+          //   user: "rslt"
+          // });
         }
       }
     });

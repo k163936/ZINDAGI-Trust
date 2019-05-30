@@ -1,30 +1,33 @@
 <html>
-
-<head>
+  <head>
     <link href="css/login-style.css" rel="stylesheet" type="text/css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="login-page">
-        <div class="form">
-            <h1>File Upload</h1>
-            <%= typeof msg != 'undefined' ? msg : '' %>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <div class="file-field input-field">
-                    <div class="btn grey">
-                        <span>Image File</span>
-                        <input name="myImage" type="file">
-                    </div>
-                </div>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-            <br>
-            <img src="<%= typeof file != 'undefined' ? file : '' %>" width="180" height="180" class="responsive-img">
-            <br><br>
-            <a href="/profile"><button type="button" class="btn">Next</button></a>
-        </div>
+      <div class="form">
+        <h1>File Upload</h1>
+        <%= typeof msg != 'undefined' ? msg : '' %>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <div class="file-field input-field">
+            <div class="btn grey">
+              <span>Image File</span>
+              <input name="myImage" type="file" />
+            </div>
+          </div>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+        <br />
+        <img
+          src="<%= typeof file != 'undefined' ? file : '' %>"
+          width="180"
+          height="180"
+          class="responsive-img"
+        />
+        <br /><br />
+        <a href="/profile"><button type="button" class="btn">Next</button></a>
+      </div>
     </div>
-</body>
-<script type="text/javascript" src="js/login-script.js"></script>
-
+  </body>
+  <script type="text/javascript" src="js/login-script.js"></script>
 </html>

@@ -5,7 +5,7 @@
       <div class="header">
         <div class="logo">
           <h1>
-            <a href="#"
+            <a href="/profile"
               ><span>ZINDAGI</span>Trust<small
                 >Ao dede inhain ZINDAGI!</small
               ></a
@@ -16,13 +16,14 @@
         <div class="clr"></div>
         <!-- Profile Picture -->
         <div class="hbg">
-          <img
-            style="border:1px solid;"
-            src="images/header_images.jpg"
-            width="180"
-            height="180"
-            alt=""
-          />
+          <a href="/profile/edit"
+            ><img
+              style="border:1px solid;"
+              src="uploads/<%= user[0].profilePic %>"
+              width="180"
+              height="180"
+              alt=""
+          /></a>
         </div>
         <!-- Menu bar starts -->
         <div class="menu_nav">

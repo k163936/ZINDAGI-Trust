@@ -35,14 +35,21 @@ module.exports = function(passport) {
             } else {
               var newUserMysql = {
                 username: username,
-                password: password
+                password: password,
+                name: req.body.name,
+                email: req.body.email
               };
 
               var insertQuery =
-                "INSERT INTO users (username, password) values (?, ?)";
+                "INSERT INTO users (name, username, password, email) values (?, ?, ?, ?)";
               connection.query(
                 insertQuery,
-                [newUserMysql.username, newUserMysql.password],
+                [
+                  newUserMysql.name,
+                  newUserMysql.username,
+                  newUserMysql.password,
+                  newUserMysql.email
+                ],
                 (err, rows) => {
                   newUserMysql.id = rows.insertId;
                   return done(null, newUserMysql);
