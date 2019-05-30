@@ -4,13 +4,17 @@
   "description": "Ao dede inhain ZINDAGI",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fahad Hussain",
   "license": "ISC",
   "dependencies": {
+    "append-field": "^1.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "busboy": "^0.3.1",
+    "concat-stream": "^2.0.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
@@ -18,7 +22,10 @@
     "express-session": "^1.16.1",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
+    "nodemailer": "^6.2.1",
+    "object-assign": "^4.1.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "xtend": "^4.0.1"
   }
 }

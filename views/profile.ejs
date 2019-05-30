@@ -49,17 +49,20 @@
             <div class="article">
               <h2><span>Top Stories</span></h2>
               <br />
+              <% result.forEach((i, index) => {%>
               <div class="clr"></div>
               <p class="post-data">
                 <span class="date">March 16, 2018</span> &nbsp;|&nbsp; Posted by
-                <a href="#">Shahid Hussain</a>
+                <a href="#"></a>
               </p>
               <p>
-                A person in Liaqatabad had an accident yesterday and need 50,000
-                RS urgent.
+                <%= i.details %>
               </p>
-              <p class="spec"><a href="#" class="com fr">Donate</a></p>
+              <p class="spec">
+                <a href="/profile/post" class="com fr">Donate</a>
+              </p>
               <div class="clr"></div>
+              <% }) %>
             </div>
             <!-- donation ends -->
 

@@ -1,7 +1,6 @@
 var LocalStrategy = require("passport-local").Strategy;
 
 var mysql = require("mysql");
-var bcrypt = require("bcrypt-nodejs");
 var dbconfig = require("./database");
 var connection = mysql.createConnection(dbconfig.connection);
 
@@ -43,13 +42,11 @@ module.exports = function(passport) {
             } else {
               var newUserMysql = {
                 username: username,
-                password: password //bcrypt.hashSync(password, null, null)
-                // name: name
+                password: password
               };
 
               var insertQuery =
                 "INSERT INTO users (username, password) values (?, ?)";
-              // console.log(insertQuery, newUserMysql.name, newUserMysql.username, newUserMysql.password)
               connection.query(
                 insertQuery,
                 [newUserMysql.username, newUserMysql.password],
@@ -88,7 +85,6 @@ module.exports = function(passport) {
               );
 
             if (password == rows.passpword)
-              // if (!bcrypt.compareSync(password, rows[0].password))
               return done(
                 null,
                 false,

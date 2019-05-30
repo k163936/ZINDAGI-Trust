@@ -1,7 +1,11 @@
 const express = require("express");
 
+const nodemailer = require("nodemailer");
+
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
+
 var mysql = require("mysql");
-var bcrypt = require("bcrypt-nodejs");
 var dbconfig = require("./database");
 var connection = mysql.createConnection(dbconfig.connection);
 
@@ -57,7 +61,8 @@ module.exports = (app, passport) => {
         res.redirect("/login");
       } else {
         res.render("profile", {
-          user: rslt
+          user: rslt,
+          result: rslt
         });
       }
     });
@@ -126,7 +131,7 @@ module.exports = (app, passport) => {
 
   router.get("/accepter", function(req, res) {
     let query = "SELECT * FROM donations WHERE type = 'accepter';";
-    console.log(query);
+
     connection.query(query, function(err, result) {
       if (err) {
         console.log("Error in query");
@@ -140,8 +145,9 @@ module.exports = (app, passport) => {
     });
   });
   router.get("/myDonations", function(req, res) {
-    let query = "SELECT * FROM donations WHERE users.ID = donations.UID;";
-    console.log(query);
+    let query =
+      "SELECT * FROM donations WHERE " + req.user.ID + " = donations.UID;";
+
     connection.query(query, function(err, result) {
       if (err) {
         console.log("Error in query");
@@ -154,10 +160,47 @@ module.exports = (app, passport) => {
       }
     });
   });
+
+  router.get("/post", function(req, res) {
+    sendMail(req, res, req.user);
+  });
 };
 
 function isLoggedIn(req, res, next, data) {
   if (req.isAuthenticated()) return next();
 
   res.redirect("/");
+}
+
+function sendMail(req, res, user01, email02) {
+  console.log(user01.email);
+  nodemailer.createTestAccount((error, account) => {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      secure: true,
+      port: 25,
+      auth: {
+        user: "voodoosaeen@gmail.com",
+        pass: "abc123xyz456"
+      }
+    });
+
+    let mailOption = {
+      from: '"Fahad Hussain", <voodoosaeen@gmail.com>',
+      to: user01.email,
+      subject: "Zindagi Trust",
+      text:
+        "Hi " +
+        "arname" +
+        " is out of oil!\nPlease change oil as soon as possiblie from the nearest oil changer!\n\nRegards\nAdmin@VMS.com"
+    };
+
+    transporter.sendMail(mailOption, (error, info) => {
+      if (error) {
+        return console.log(error);
+      } else {
+        res.redirect("/profile");
+      }
+    });
+  });
 }
