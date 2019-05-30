@@ -7,15 +7,8 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query("USE " + dbconfig.database);
 
 module.exports = function(passport) {
-  passport.serializeUser(function(user, done) {
-    done(null, user.ID);
-  });
-
-  passport.deserializeUser(function(id, done) {
-    connection.query("SELECT * FROM users WHERE ID = ? ", [id], (err, rows) => {
-      done(err, rows[0]);
-    });
-  });
+  passport.deserializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) => done(null, user));
 
   passport.use(
     "local-signup",
