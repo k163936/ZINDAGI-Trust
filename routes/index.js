@@ -1,7 +1,7 @@
 const express = require("express");
 
 const nodemailer = require("nodemailer");
-
+const path = require("path");
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
 
@@ -164,6 +164,32 @@ module.exports = (app, passport) => {
   router.get("/post", function(req, res) {
     sendMail(req, res, req.user);
   });
+
+  app.get("/hi", function(req, res) {
+    res.render("edit-profile");
+  });
+
+  app.post("/upload", (req, res) => {
+    fun_upload(req, res, err => {
+      if (err) {
+        res.render("edit-profile", {
+          msg: err
+        });
+      } else {
+        if (req.file == undefined) {
+          res.render("edit-profile", {
+            msg: "Error: No File Selected!"
+          });
+        } else {
+          res.render("profile", {
+            msg: "File Uploaded!",
+            file: `uploads/${req.file.filename}`,
+            user: "rslt"
+          });
+        }
+      }
+    });
+  });
 };
 
 function isLoggedIn(req, res, next, data) {
@@ -204,3 +230,38 @@ function sendMail(req, res, user01, email02) {
     });
   });
 }
+// Set The Storage Engine
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function(req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
+});
+
+// Check File Type
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: Images Only!");
+  }
+}
+
+// Init Upload
+const fun_upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: function(req, file, cb) {
+    checkFileType(file, cb);
+  }
+}).single("myImage");
